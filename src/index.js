@@ -1,40 +1,34 @@
 import "./styles.css";
 import moment from "moment";
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
+
+import { counter } from "./counter.js";
+import { list } from "./list.js";
 
 document.getElementById("app").innerHTML = `
-<h1>Hello Vanilla!</h1>
+<h1>Hello World!</h1>
 <div>
-  We use Parcel to bundle this sandbox, you can find more info about Parcel
-  <a href="https://parceljs.org" target="_blank" rel="noopener noreferrer">here</a>.
+  Hello World.
 </div>
 `;
 
 //console.log(moment().toISOString());
 
-function counter(state = 0, action) {
-	switch (action.type) {
-		case "increment":
-			return state + 1;
-		case "decrement":
-			return state - 1;
-		default:
-			return state;
-	}
-}
-
-let store = createStore(counter);
+let store = createStore(combineReducers({ counter, list }));
 
 store.subscribe(() => console.log(store.getState()));
 
-store.dispatch({ type: "increment" });
-store.dispatch({ type: "increment" });
+// Action Creator function
+function actionCreatorCounter(type) {
+	return { type: type };
+}
+
 store.dispatch({ type: "increment" });
 store.dispatch({ type: "increment" });
 store.dispatch({ type: "decrement" });
 
-function actionCreatorCounter(type) {
-	return { type: type };
-}
+store.dispatch({ type: "add", item: "hello" });
+store.dispatch({ type: "add", item: "world" });
+store.dispatch({ type: "remove", item: "hello" });
 
 store.dispatch(actionCreatorCounter("increment"));
