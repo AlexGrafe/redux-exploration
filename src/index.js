@@ -1,9 +1,12 @@
 import "./styles.css";
 import moment from "moment";
 import { createStore, combineReducers } from "redux";
+import firebase from "firebase";
 
 import { counter } from "./counter.js";
 import { list } from "./list.js";
+
+console.log("modules", { moment, firebase });
 
 document.getElementById("app").innerHTML = `
 <h1>Hello World!</h1>
